@@ -15,29 +15,30 @@ swordIM.src="images/kunai.png";
 
 angle = 0;
 gt = 0;
-delta = 0.02;
+delta1 = 0.3;
 
-level = 0;
 
-speedstart =    [0, 0,  -0.03,  -0.04,      -0.05,  -1.5,   -3,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-speed =         [2, 2.5,0,      0,          0,      0,      2,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-delta =         [0, 0,  0.03,   0.04,       0.05,   0.04,   0.11,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-speedend =      [0, 0,  0.03,   0.04,       0.05,   0.04,   0.11,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-maxvt =         [6, 6,  4,      5,          7,      7,      10,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-minvt =         [0, 0,  0,      1,          -9,     -9,     -9,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+level = 8;
+
+speedstart =    [0, 0,  -0.25,  -0.04,      -0.3,  -1.5,   -3,      -0.2,  -0.3,     -2  ]
+speed =         [2, 2.5,0,      0,          2,      0,      2,      0,  0,      3 ]
+delta =         [0, 0,  0.05,   0.05,       0.05,   0.04,   0.3,    0.4,  0.3,      1.2]
+speedend =      [0, 0,  0.05,   0.05,       0.05,   0.04,   0.3,    0.4,  0.3,      1.2]
+maxvt =         [6, 6,  5,      5,          7,      7,      10,     6,  8,     10 ]
+minvt =         [0, 0,  0.5,    1,          -6,     -9,     -9,     2,  -8.2,    -10   ]
 
 knife = [[],
 [0,60],
 [0,120],
-[30,80],
+[30,80,230],
 [30,180],
 [0,180],
-[10,30,50],
+[10,50],
 [],
-[],
+[255],
 []] ;
 
-limKnife = [10,10,12,10,13,14,13,0,0,0,0,0,0,0,0,0,0,0,0,0]
+limKnife = [10,13,13,10,14,12,13,10,12,15,2,2,2,2,2,2,2,2,2,2]
 
 
 class game {
@@ -80,6 +81,10 @@ class game {
                 
                 b[Math.floor(360-angle)] = true;
                 if (--score<1){
+                    if (level==9){
+                        window.alert("You Win!" + "\n" + "Your max level: " + (level+1));
+                        location.reload();
+                    }
                     score=limKnife[++level];
                     for(var i = 0; i<360; i++){
                         b[i] = false;
@@ -113,8 +118,35 @@ class game {
         if(speed[level]>maxvt[level]) delta[level]=speedstart[level];
         if(speed[level]<minvt[level]) delta[level]=speedend[level];
 
+        
+
+        if(level == 9 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
+            speedstart[level]=Math.random()*2-2;
+            speedend[level]=Math.random()*2;
+            maxvt[level] = Math.floor(Math.random()*10+10);
+            minvt[level] = Math.floor(Math.random()*10-15);
+            console.log(maxvt[level]+" "+minvt[level]);
+
+        }
+        if(level == 6 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
+            speedstart[level]=Math.random()*1.5-2;
+            maxvt[level] = Math.floor(Math.random()*7+10);
+            minvt[level] = Math.floor(Math.random()*7-15);
+            console.log(maxvt[level]+" "+minvt[level]);
+
+        }
+        if(level == 8 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
+             maxvt[level] = Math.random()*2+6;
+             minvt[level] = Math.random()*2-6;
+
+
+
+        }
+        console.log(maxvt[level]+" "+minvt[level]);
+
         angle %= 360;
         if (angle < 0) angle += 360;
+
         
     }
 
