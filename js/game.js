@@ -8,7 +8,7 @@ var bg = new Image();
 bg.src="images/bg.jpg";
 b = [];
 var bitcoinIM = new Image();
-bitcoinIM.src="images/eye.png";
+bitcoinIM.src="images/Sharingan-1.png";
 
 var swordIM = new Image();
 swordIM.src="images/kunai.png";
@@ -17,16 +17,28 @@ angle = 0;
 gt = 0;
 delta = 0.02;
 
-level = 0;
+level = 6;
 
-speedstart =    [0,0,-0.04,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-speed =         [1,1.5,0,1.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-delta =         [0,0,0.03,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-speedend =      [0,0,0.03,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-maxvt =         [6,6,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-minvt =         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+speedstart =    [0, 0,  -0.03,  -0.04,      -0.05,  -1.5,   -3,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+speed =         [2, 2.5,0,      0,          0,      0,      2,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+delta =         [0, 0,  0.03,   0.04,       0.05,   0.04,   0.11,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+speedend =      [0, 0,  0.03,   0.04,       0.05,   0.04,   0.11,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+maxvt =         [6, 6,  4,      5,          7,      7,      10,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+minvt =         [0, 0,  0,      1,          -9,     -9,     -9,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
-limKnife = [5,10,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+knife = [[],
+[0,60],
+[0,120],
+[30,80],
+[30,180],
+[0,180],
+[10,30,50],
+[],
+[],
+[]] ;
+
+limKnife = [10,10,12,10,13,14,13,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
 
 class game {
     constructor() {
@@ -41,9 +53,11 @@ class game {
         this.context = this.canvas.getContext("2d");
         document.body.appendChild(this.canvas);
 
-        for (let i = 0; i < 45; i++)
+        for (let i = 0; i < 360; i++)
             b[i] = false;
-
+        for(var i = 0; i<knife[level].length; i++){
+            b[knife[level][i]] = true;
+        }   
         this.render();
         
         this.loop();
@@ -55,16 +69,24 @@ class game {
     listenKeyboard() {
         document.addEventListener("keydown", key => {
             if (key.keyCode == 32) {
-                for(var i = Math.floor((360 - angle-8)); i <= Math.floor((360 - angle+8)); i++)
-                if (b[i]) {
-                    window.alert("You Lose!" + "\n" + "Your max level: " + level+1);
-                    location.reload();
+                for(var i = 360-angle-8; i <= 360-angle+8; i++){
+                    if (b[Math.floor(i>=360?i-360:(i<0?i+360:i))]) {
+                        window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
+                        location.reload();
+                        break;
+                  }
                 }
-                b[Math.floor((360 - angle))] = true;
+                console.log("angle"+Math.floor(360-angle));
+                
+                b[Math.floor(360-angle)] = true;
                 if (--score<1){
                     score=limKnife[++level];
                     for(var i = 0; i<360; i++){
                         b[i] = false;
+                    }
+                    bitcoinIM.src="images/Sharingan-"+(level+1)+".png";
+                    for(var i = 0; i<knife[level].length; i++){
+                        b[knife[level][i]] = true;
                     }
                 }
             }
@@ -80,7 +102,7 @@ class game {
     loop() {
         this.update();
         this.draw();
-        setTimeout(() => this.loop(), 7);
+        setTimeout(() => this.loop(), 15);
     }
 
     update() {
@@ -92,6 +114,7 @@ class game {
         if(speed[level]<minvt[level]) delta[level]=speedend[level];
 
         angle %= 360;
+        if (angle < 0) angle += 360;
         
     }
 
