@@ -244,9 +244,9 @@ class game {
 
         this.context.fillStyle = "#e67c20";
         this.context.font = this.getWidth() / 1.5 + 'px Sans-Serif';
-        this.context.drawImage(swordIM, this.getWidth(), this.getWidth()-70, size / 4, size / 4);
-        this.context.fillText(" x " + score, this.getWidth()+70, this.getWidth());
-        this.context.fillText("Level: " + (level+1), size*3, this.getWidth());
+        this.context.drawImage(swordIM, game_W*1/30, game_H*1/30, size / 4, size / 4);
+        this.context.fillText(" x " + score, game_W*1/13, game_H*1/9);
+        this.context.fillText("Level: " + (level+1), game_W*7.5/9, game_H*1/9);
     }
 
     clearScreen() {
