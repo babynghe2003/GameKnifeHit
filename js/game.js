@@ -15,21 +15,14 @@ function gameover(s1,s2){
 function reload(e){
     location.reload();
 }
-// btnOpen.addEventListener('click', toggleModal)
 btnClose.addEventListener('click', reload)
-// iconClose.addEventListener('click', reload)
-// modal.addEventListener('click', toggleModal)
-// modal.addEventListener('click', function(e){
-//     if(e.target == e.currentTarget){
-//         reload(e)
-//     }
-// })
+
 
 let game_W = 20;
 let game_H = 20;
 size = 0;
 XXX = 0, YYY = 0;
-score = 9;
+score = 0;
 
 var bg = new Image();
 bg.src="images/bg.jpg";
@@ -70,7 +63,6 @@ limKnife = [10,13,13,11,14,12,11,10,14,16,2,2,2,2,2,2,2,2,2,2]
 
 class game {
     constructor() {
-
         this.canvas = null;
         this.context = null;
         this.init();
@@ -104,7 +96,7 @@ class game {
                         toggleModal(this)
                         // window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
                         // location.reload();
-                        speed=0;
+                        speed = 0;
                         break;
                   }
                 }
@@ -117,6 +109,7 @@ class game {
                         toggleModal(this)
                         // window.alert("You Win!" + "\n" + "Your max level: " + (level+1));
                         // location.reload();
+                        speed = 0
                     }
                     score=limKnife[++level];
                     for(var i = 0; i<360; i++){
@@ -154,10 +147,10 @@ class game {
         
 
         if(level == 9 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
-            speedstart[level]=Math.random()*2-2.1;
-            speedend[level]=Math.random()*2+0.5;
-            maxvt[level] = Math.floor(Math.random()*10+3);
-            minvt[level] = Math.floor(Math.random()*10-12);
+            speedstart[level]=Math.random()*2-3;
+            speedend[level]=Math.random()*2+2;
+            maxvt[level] = Math.floor(Math.random()*10+10);
+            minvt[level] = Math.floor(Math.random()*10-15);
             console.log(maxvt[level]+" "+minvt[level]);
 
         }
@@ -246,7 +239,3 @@ class game {
 }
 
 var g = new game();
-//<<<<<<< HEAD
-
-// =======
-// >>>>>>> 717ba99ca946ca4f2250136dc544e8cabac60c08
