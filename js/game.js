@@ -18,14 +18,14 @@ gt = 0;
 delta1 = 0.3;
 
 
-level = 0;
+level = 9;
 
 speedstart =    [0, 0,  -0.25,  -0.04,      -0.3,  -1.5,   -3,      -0.2,  -0.3,     -2  ]
 speed =         [2, 2.5,0,      0,          2,      0,      2,      0,  0,      3 ]
 delta =         [0, 0,  0.05,   0.05,       0.05,   0.04,   0.3,    0.4,  0.3,      1.2]
 speedend =      [0, 0,  0.05,   0.05,       0.05,   0.04,   0.3,    0.4,  0.3,      1.2]
-maxvt =         [6, 6,  5,      5,          7,      7,      10,     6,  8,     10 ]
-minvt =         [0, 0,  0.5,    1,          -6,     -9,     -9,     2,  -8.2,    -10   ]
+maxvt =         [6, 6,  5,      5,          7,      7,      10,     6,  10,     10 ]
+minvt =         [0, 0,  0.5,    1,          -6,     -9,     -9,     2,  -10,    -10   ]
 
 knife = [[],
 [0,60],
@@ -38,7 +38,7 @@ knife = [[],
 [255],
 [356]] ;
 
-limKnife = [10,13,13,11,14,12,10,10,10,13,2,2,2,2,2,2,2,2,2,2]
+limKnife = [10,13,13,11,14,12,10,10,10,12,2,2,2,2,2,2,2,2,2,2]
 
 
 class game {
@@ -121,8 +121,8 @@ class game {
         
 
         if(level == 9 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
-            speedstart[level]=Math.random()*2-2;
-            speedend[level]=Math.random()*2;
+            speedstart[level]=Math.random()*2-3;
+            speedend[level]=Math.random()*2+2;
             maxvt[level] = Math.floor(Math.random()*10+10);
             minvt[level] = Math.floor(Math.random()*10-15);
             console.log(maxvt[level]+" "+minvt[level]);
@@ -136,8 +136,8 @@ class game {
 
         }
         if(level == 8 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
-             maxvt[level] = Math.random()*2+6;
-             minvt[level] = Math.random()*2-6;
+             maxvt[level] = Math.random()*5+6;
+             minvt[level] = Math.random()*5-10;
 
 
 
@@ -183,7 +183,7 @@ class game {
         this.context.save();
         this.context.translate(XXX, YYY);
         this.context.rotate(this.toRadian(angle));
-        this.context.drawImage(bitcoinIM, - size/2, - size/2, size, size);
+        this.context.drawImage(bitcoinIM, - size*5/8, - size*5/8, size*5/4, size*5/4);
         this.context.restore();
 
         this.context.fillStyle = "#e67c20";
