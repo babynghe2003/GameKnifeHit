@@ -1,8 +1,35 @@
+var modal = document.querySelector('.modal');
+var btnClose = document.querySelector('.closeModal');
+var iconClose = document.querySelector('.modal__header i');
+var over = document.querySelector('.over');
+var score2 = document.querySelector('.score');
+
+
+function toggleModal(e){
+    modal.classList.toggle('hide')
+}
+function gameover(s1,s2){
+    over.innerText = s1;
+    score2.innerText = s2;
+}
+function reload(e){
+    location.reload();
+}
+// btnOpen.addEventListener('click', toggleModal)
+btnClose.addEventListener('click', reload)
+// iconClose.addEventListener('click', reload)
+// modal.addEventListener('click', toggleModal)
+// modal.addEventListener('click', function(e){
+//     if(e.target == e.currentTarget){
+//         reload(e)
+//     }
+// })
+
 let game_W = 20;
 let game_H = 20;
 size = 0;
 XXX = 0, YYY = 0;
-score = 0;
+score = 9;
 
 var bg = new Image();
 bg.src="images/bg.jpg";
@@ -18,7 +45,7 @@ gt = 0;
 delta1 = 0.3;
 
 
-level = 9;
+level = 0;
 
 speedstart =    [0, 0,  -0.25,  -0.04,      -0.3,  -1.5,   -3,      -0.2,  -0.3,     -2  ]
 speed =         [2, 2.5,0,      0,          2,      0,      2,      0,  0,      3 ]
@@ -38,11 +65,12 @@ knife = [[],
 [255],
 [356]] ;
 
-limKnife = [10,13,13,11,14,12,10,10,10,12,2,2,2,2,2,2,2,2,2,2]
+limKnife = [10,13,13,11,14,12,11,10,14,16,2,2,2,2,2,2,2,2,2,2]
 
 
 class game {
     constructor() {
+
         this.canvas = null;
         this.context = null;
         this.init();
@@ -72,8 +100,11 @@ class game {
             if (key.keyCode == 32) {
                 for(var i = 360-angle-8; i <= 360-angle+8; i++){
                     if (b[Math.floor(i>=360?i-360:(i<0?i+360:i))]) {
-                        window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
-                        location.reload();
+                        gameover("You lose",("Score: "+(level+1)));
+                        toggleModal(this)
+                        // window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
+                        // location.reload();
+                        speed=0;
                         break;
                   }
                 }
@@ -82,8 +113,10 @@ class game {
                 b[Math.floor(360-angle)] = true;
                 if (--score<1){
                     if (level==9){
-                        window.alert("You Win!" + "\n" + "Your max level: " + (level+1));
-                        location.reload();
+                        gameover("Congratulation","You Win!!!");
+                        toggleModal(this)
+                        // window.alert("You Win!" + "\n" + "Your max level: " + (level+1));
+                        // location.reload();
                     }
                     score=limKnife[++level];
                     for(var i = 0; i<360; i++){
@@ -121,10 +154,10 @@ class game {
         
 
         if(level == 9 && (speed[level]>maxvt[level] || speed[level]<minvt[level])){
-            speedstart[level]=Math.random()*2-3;
-            speedend[level]=Math.random()*2+2;
-            maxvt[level] = Math.floor(Math.random()*10+10);
-            minvt[level] = Math.floor(Math.random()*10-15);
+            speedstart[level]=Math.random()*2-2.1;
+            speedend[level]=Math.random()*2+0.5;
+            maxvt[level] = Math.floor(Math.random()*10+3);
+            minvt[level] = Math.floor(Math.random()*10-12);
             console.log(maxvt[level]+" "+minvt[level]);
 
         }
@@ -213,3 +246,4 @@ class game {
 }
 
 var g = new game();
+

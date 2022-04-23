@@ -17,3 +17,59 @@ html {
 
 html { overflow-y: hidden; }
 
+  
+  .modal {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.6);
+
+  }
+  
+  .modal__inner{
+      width: 400px;
+      position: relative;
+      top: 30%;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+  }
+  .modal__header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: rgb(255, 119, 28);
+
+      border-radius: 10px 10px 0 0;
+  }
+  
+  .modal__body{
+      padding: 15px;
+  }
+  
+  .modal__body p{
+      margin-bottom: 10px;
+  }
+  
+  .modal__footer{
+      padding: 15px;
+      text-align: right;
+  }
+  
+  .modal__footer button{
+      padding:10px 20px;
+      background: rgb(255, 119, 28);
+      border-radius:5px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+  }
+  span{
+      font-family: sans-serif;
+      font-size: 20px;
+  }
+  .hide{
+      display: none;
+  }
