@@ -38,12 +38,12 @@ gt = 0;
 delta1 = 0.3;
 
 
-level = 0;
+level = 4;
 
-speedstart =    [0, 0,  -0.25,  -0.04,      -0.3,  -1.5,   -3,      -0.2,  -0.3,     -2  ]
+speedstart =    [0, 0,  -0.25,  -0.04,      -0.6,  -1.5,   -3,      -0.2,  -0.3,     -2  ]
 speed =         [2, 2.5,0,      0,          2,      0,      2,      0,  0,      3 ]
-delta =         [0, 0,  0.05,   0.05,       0.05,   0.04,   0.3,    0.4,  0.3,      1.2]
-speedend =      [0, 0,  0.05,   0.05,       0.05,   0.04,   0.3,    0.4,  0.3,      1.2]
+delta =         [0, 0,  0.05,   0.05,       0.1,   0.04,   0.3,    0.4,  0.3,      1.2]
+speedend =      [0, 0,  0.05,   0.05,       0.1,   0.04,   0.3,    0.4,  0.3,      1.2]
 maxvt =         [6, 6,  5,      5,          7,      7,      10,     6,  10,     10 ]
 minvt =         [0, 0,  0.5,    1,          -6,     -9,     -9,     2,  -10,    -10   ]
 
@@ -58,7 +58,7 @@ knife = [[],
 [255],
 [356]] ;
 
-limKnife = [10,13,13,11,14,12,11,10,14,16,2,2,2,2,2,2,2,2,2,2]
+limKnife = [10,13,13,11,17,12,11,10,14,16,2,2,2,2,2,2,2,2,2,2]
 
 
 class game {
@@ -126,7 +126,37 @@ class game {
 
     listenMouse() {
         document.addEventListener("mousedown", evt => {
+            for(var i = 360-angle-8; i <= 360-angle+8; i++){
+                if (b[Math.floor(i>=360?i-360:(i<0?i+360:i))]) {
+                    gameover("You lose",("Score: "+(level+1)));
+                    toggleModal(this)
+                    // window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
+                    // location.reload();
+                    speed = 0;
+                    break;
+              }
+            }
+            console.log("angle"+Math.floor(360-angle));
             
+            b[Math.floor(360-angle)] = true;
+            if (--score<1){
+                if (level==9){
+                    gameover("Congratulation","You Win!!!");
+                    toggleModal(this)
+                    // window.alert("You Win!" + "\n" + "Your max level: " + (level+1));
+                    // location.reload();
+                    speed = 0
+                }
+                score=limKnife[++level];
+                for(var i = 0; i<360; i++){
+                    b[i] = false;
+                }
+                bitcoinIM.src="images/Sharingan-"+(level+1)+".png";
+                for(var i = 0; i<knife[level].length; i++){
+                    b[knife[level][i]] = true;
+                }
+            }
+
         })
     }
 
