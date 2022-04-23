@@ -246,4 +246,7 @@ class game {
 }
 
 var g = new game();
+//<<<<<<< HEAD
 
+// =======
+// >>>>>>> 717ba99ca946ca4f2250136dc544e8cabac60c08
