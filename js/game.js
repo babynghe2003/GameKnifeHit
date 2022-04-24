@@ -110,6 +110,9 @@ class game {
                         // window.alert("You Win!" + "\n" + "Your max level: " + (level+1));
                         // location.reload();
                         speed = 0
+                    }else{
+                        window.alert("DONE level: " + (level+1));
+
                     }
                     score=limKnife[++level];
                     for(var i = 0; i<360; i++){
