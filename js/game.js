@@ -37,6 +37,7 @@ angle = 0;
 gt = 0;
 delta1 = 0.3;
 
+alive = true;
 
 level = 0;
 
@@ -97,13 +98,14 @@ class game {
                         // window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
                         // location.reload();
                         speed = 0;
+                        alive = false;
                         break;
                   }
                 }
                 console.log("angle"+Math.floor(360-angle));
                 
                 b[Math.floor(360-angle)] = true;
-                if (--score<1){
+                if (--score<1 & alive){
                     if (level==9){
                         gameover("Congratulation","You Win!!!");
                         toggleModal(this)
