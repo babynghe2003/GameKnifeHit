@@ -1,28 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <title>Throwing Knife Game by Minh Phi</title>
-    <link rel="stylesheet" href="css/style.css">
-    <meta 
-        name='viewport' 
-        content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
+    <link rel="stylesheet" href="css/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-</head>
-<body>
-    <div class="modal hide">
-        <div class="modal__inner">
-            <div class="modal__header">
-                <span class="over">Welcome to Popup</span>
-                <i class='bx bx-x'></i>
-            </div>
-            <div class="modal__body">
-                <span class="score">anc</span>
-            </div>
-            <div class="modal__footer">
-                <button class="closeModal">Close</button>
-            </div>
-        </div>
+  </head>
+  <body>
+    <div class="form-modal">
+      <div class="modal-content">
+        <h1>User Information Form</h1>
+        <form onsubmit="submitForm(event)">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your name"
+            required
+          />
+
+          <label for="school">School:</label>
+          <input
+            type="text"
+            id="school"
+            name="school"
+            placeholder="Enter your school"
+            required
+          />
+
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     </div>
-</body>
-<script type="text/javascript" src="js/game.js"></script>
+
+    <div class="modal hide">
+      <div class="modal__inner">
+        <div class="modal__header">
+          <span class="over">Welcome to Popup</span>
+          <i class="bx bx-x"></i>
+        </div>
+        <div class="modal__body">
+          <span class="score">anc</span>
+        </div>
+        <div class="modal__footer">
+          <button class="closeModal">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/game.js"></script>
 </html>

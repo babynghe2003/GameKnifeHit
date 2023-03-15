@@ -1,0 +1,11 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "Minh Phi",
+      "school": "VKU",
+      "email": "minhphi@gmail.com",
+      "score": 10
+    }
+  ]
+}
