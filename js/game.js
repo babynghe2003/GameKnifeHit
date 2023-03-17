@@ -1,3 +1,4 @@
+level = 0;
 
 isStart = false;
 var modal = document.querySelector(".modal");
@@ -8,16 +9,17 @@ var score2 = document.querySelector(".score");
 
 var formModal = document.querySelector(".form-modal")
 
-//name = ""
-//school = ""
-//email = ""
+var playerName = ""
+var playerSchool = ""
+var playerPhone = ""
 
 function submitForm(e) {
   e.preventDefault();
   isStart = true;
-  //name = document.querySelector("#name").value;
-  //school = document.querySelector("#school").value;
-  //email = document.querySelector("#email").value;
+  playerName = document.querySelector("#name").value;
+  playerSchool = document.querySelector("#school").value;
+  playerPhone = document.querySelector("#phone").value;
+  console.log(playerName, playerSchool, playerPhone)
   formModal.classList.add("hide");
 }
 
@@ -27,6 +29,7 @@ function toggleModal(e) {
 function gameover(s1, s2) {
   over.innerText = s1;
   score2.innerText = s2;
+  Util.postPlayerScore(playerName, "knife-hit", playerSchool, playerPhone, level + 1)
 }
 function reload(e) {
   location.reload();
@@ -54,7 +57,6 @@ delta1 = 0.3;
 
 alive = true;
 
-level = 0;
 
 speedstart = [0, 0, -0.25, -0.04, -0.6, -1.5, -3, -0.2, -0.3, -2];
 speed = [2, 2.5, 0, 0, 2, 0, 2, 0, 0, 3];
@@ -117,6 +119,7 @@ class game {
             //})
             setTimeout(() => {
             gameover("You lose", "Score: " + (level + 1));
+
             toggleModal(this);
             }, 3);
             // window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
