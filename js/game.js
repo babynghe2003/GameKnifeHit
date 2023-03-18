@@ -1,4 +1,4 @@
-level = 0;
+level = 8;
 
 isStart = false;
 var modal = document.querySelector(".modal");
@@ -79,7 +79,7 @@ knife = [
 ];
 
 limKnife = [
-  10, 13, 13, 11, 17, 12, 14, 15, 14, 16, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+  10, 13, 10, 8, 13, 12, 14, 15, 14, 16, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 ];
 
 class game {
