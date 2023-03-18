@@ -1,4 +1,4 @@
-level = 8;
+level = 0;
 
 isStart = false;
 var modal = document.querySelector(".modal");
