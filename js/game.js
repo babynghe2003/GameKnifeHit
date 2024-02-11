@@ -7,19 +7,11 @@ var iconClose = document.querySelector(".modal__header i");
 var over = document.querySelector(".over");
 var score2 = document.querySelector(".score");
 
-var formModal = document.querySelector(".form-modal")
-
-var playerName = ""
-var playerSchool = ""
-var playerPhone = ""
+var formModal = document.querySelector(".form-modal");
 
 function submitForm(e) {
   e.preventDefault();
   isStart = true;
-  playerName = document.querySelector("#name").value;
-  playerSchool = document.querySelector("#school").value;
-  playerPhone = document.querySelector("#phone").value;
-  console.log(playerName, playerSchool, playerPhone)
   formModal.classList.add("hide");
 }
 
@@ -29,10 +21,11 @@ function toggleModal(e) {
 function gameover(s1, s2) {
   over.innerText = s1;
   score2.innerText = s2;
-  Util.postPlayerScore(playerName, "knife-hit", playerSchool, playerPhone, level + 1)
+  btnClose.focus();
 }
 function reload(e) {
   location.reload();
+  level = 0;
 }
 btnClose.addEventListener("click", reload);
 
@@ -56,7 +49,6 @@ gt = 0;
 delta1 = 0.3;
 
 alive = true;
-
 
 speedstart = [0, 0, -0.25, -0.04, -0.6, -1.5, -3, -0.2, -0.3, -2];
 speed = [2, 2.5, 0, 0, 2, 0, 2, 0, 0, 3];
@@ -96,8 +88,8 @@ class game {
     document.body.appendChild(this.canvas);
 
     for (let i = 0; i < 360; i++) b[i] = false;
-      for (var i = 0; i < knife[level].length; i++) {
-       b[knife[level][i]] = true;
+    for (var i = 0; i < knife[level].length; i++) {
+      b[knife[level][i]] = true;
     }
     this.render();
 
@@ -112,15 +104,15 @@ class game {
         for (var i = 360 - angle - 8; i <= 360 - angle + 8; i++) {
           if (b[Math.floor(i >= 360 ? i - 360 : i < 0 ? i + 360 : i)]) {
             //addUser({
-              //name: name,
-              //school: school,
-              //email: email,
-              //score: level + 1,
+            //name: name,
+            //school: school,
+            //email: email,
+            //score: level + 1,
             //})
             setTimeout(() => {
-            gameover("You lose", "Score: " + (level + 1));
+              gameover("You lose", "Score: " + (level + 1));
 
-            toggleModal(this);
+              toggleModal(this);
             }, 3);
             // window.alert("You Lose!" + "\n" + "Your max level: " + (level+1));
             // location.reload();
@@ -199,8 +191,8 @@ class game {
 
   update() {
     this.render();
-    
-    if (! isStart) return;
+
+    if (!isStart) return;
     angle += speed[level];
 
     speed[level] += delta[level];
@@ -354,5 +346,4 @@ class game {
 }
 
 var g = new game();
-setTimeout(() => g.loop(), 10)
-
+setTimeout(() => g.loop(), 10);
